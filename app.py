@@ -73,3 +73,8 @@ def delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     return redirect(url_for('post', post_id=post_id))
+
+@app.route('/tags/<tag_name>/')
+def tag(tag_name):
+    tag = Tag.query.filter_by(name=tag_name).first_or_404()
+    return render_template('tag.html', tag=tag)
